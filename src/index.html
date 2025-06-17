@@ -1,164 +1,225 @@
 <!DOCTYPE html>
-<html ng-app="taskApp">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AngularJS Task Manager</title>
-    
+
     <!-- External Dependencies -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.6/underscore-min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.0/axios.min.js"></script>
-    
-</head>
-<body ng-controller="TaskController as vm">
+  </head>
+  <body ng-controller="TaskController as vm">
     <div class="container">
-        <div class="header">
-            <h1>📋 Task Manager</h1>
-            <p>Manage your tasks efficiently with AngularJS</p>
+      <div class="header">
+        <h1>📋 Task Manager</h1>
+        <p>Manage your tasks efficiently with AngularJS</p>
+      </div>
+
+      <div class="content">
+        <!-- Task Form -->
+        <div class="task-form">
+          <h3>Add New Task</h3>
+          <form ng-submit="vm.addTask()" name="taskForm">
+            <div class="form-group">
+              <label for="title">Task Title</label>
+              <input
+                type="text"
+                id="title"
+                class="form-control"
+                ng-model="vm.newTask.title"
+                placeholder="Enter task title..."
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="description">Description</label>
+              <textarea
+                id="description"
+                class="form-control"
+                ng-model="vm.newTask.description"
+                placeholder="Enter task description..."
+                rows="3"
+              ></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="users">Assign To</label>
+              <select
+                id="users"
+                class="form-control"
+                ng-model="vm.newTask.users"
+              >
+                <option ng-repeat="user in vm.users" value="{{user.name}}">
+                  {{user.name}}
+                </option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="categories">Category</label>
+              <select
+                id="categories"
+                class="form-control"
+                ng-model="vm.newTask.categories"
+              >
+                <option
+                  ng-repeat="category in vm.categories"
+                  value="{{category.name}}"
+                >
+                  {{category.name}}
+                </option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="priority">Priority</label>
+              <select
+                id="priority"
+                class="form-control"
+                ng-model="vm.newTask.priority"
+              >
+                <option value="low">Low</option>
+                <option value="medium" selected>Medium</option>
+                <option value="high">High</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="dueDate">Due Date</label>
+              <input
+                type="date"
+                id="dueDate"
+                class="form-control"
+                ng-model="vm.newTask.dueDate"
+              />
+            </div>
+
+            <button
+              type="submit"
+              class="btn btn-primary"
+              ng-disabled="taskForm.$invalid"
+            >
+              Add Task
+            </button>
+          </form>
         </div>
-        
-        <div class="content">
-            <!-- Task Form -->
-            <div class="task-form">
-                <h3>Add New Task</h3>
-                <form ng-submit="vm.addTask()" name="taskForm">
-                    <div class="form-group">
-                        <label for="title">Task Title</label>
-                        <input type="text" 
-                               id="title" 
-                               class="form-control" 
-                               ng-model="vm.newTask.title" 
-                               placeholder="Enter task title..."
-                               required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="description">Description</label>
-                        <textarea id="description" 
-                                  class="form-control" 
-                                  ng-model="vm.newTask.description" 
-                                  placeholder="Enter task description..."
-                                  rows="3"></textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="priority">Priority</label>
-                        <select id="priority" 
-                                class="form-control" 
-                                ng-model="vm.newTask.priority">
-                            <option value="low">Low</option>
-                            <option value="medium" selected>Medium</option>
-                            <option value="high">High</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="dueDate">Due Date</label>
-                        <input type="date" 
-                               id="dueDate" 
-                               class="form-control" 
-                               ng-model="vm.newTask.dueDate">
-                    </div>
-                    
-                    <button type="submit" 
-                            class="btn btn-primary" 
-                            ng-disabled="taskForm.$invalid">
-                        Add Task
-                    </button>
-                </form>
+
+        <!-- Filters -->
+        <div class="filter-section">
+          <div class="filter-group">
+            <span class="filter-label">Filters:</span>
+
+            <div class="checkbox-group">
+              <input
+                type="checkbox"
+                id="showCompleted"
+                ng-model="vm.showCompleted"
+              />
+              <label for="showCompleted">Show Completed</label>
             </div>
-            
-            <!-- Filters -->
-            <div class="filter-section">
-                <div class="filter-group">
-                    <span class="filter-label">Filters:</span>
-                    
-                    <div class="checkbox-group">
-                        <input type="checkbox" 
-                               id="showCompleted" 
-                               ng-model="vm.showCompleted">
-                        <label for="showCompleted">Show Completed</label>
-                    </div>
-                    
-                    <div class="form-group" style="margin: 0;">
-                        <select ng-model="vm.priorityFilter" class="form-control" style="width: auto;">
-                            <option value="">All Priorities</option>
-                            <option value="high">High Priority</option>
-                            <option value="medium">Medium Priority</option>
-                            <option value="low">Low Priority</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group" style="margin: 0;">
-                        <input type="text" 
-                               class="form-control" 
-                               ng-model="vm.searchText" 
-                               placeholder="Search tasks..."
-                               style="width: 200px;">
-                    </div>
-                </div>
+
+            <div class="form-group" style="margin: 0">
+              <select
+                ng-model="vm.priorityFilter"
+                class="form-control"
+                style="width: auto"
+              >
+                <option value="">All Priorities</option>
+                <option value="high">High Priority</option>
+                <option value="medium">Medium Priority</option>
+                <option value="low">Low Priority</option>
+              </select>
             </div>
-            
-            <!-- Tasks List -->
-            <div class="tasks-section">
-                <div class="tasks-header">
-                    <h2>Tasks</h2>
-                    <div class="task-stats">
-                        Total: {{vm.getFilteredTasks().length}} | 
-                        Completed: {{vm.getCompletedCount()}}
-                    </div>
-                </div>
-                
-                <div ng-if="vm.getFilteredTasks().length === 0" class="no-tasks">
-                    <div class="no-tasks-icon">📝</div>
-                    <h3>No tasks found</h3>
-                    <p>Add a new task or adjust your filters</p>
-                </div>
-                
-                <div ng-repeat="task in vm.getFilteredTasks() | orderBy:vm.sortBy track by task.id" 
-                     class="task-item" 
-                     ng-class="{'completed': task.completed}">
-                    
-                    <div class="task-header">
-                        <div>
-                            <h4 class="task-title" ng-class="{'completed-text': task.completed}">
-                                {{task.title}}
-                            </h4>
-                            <span class="task-priority priority-{{task.priority}}">
-                                {{task.priority}}
-                            </span>
-                        </div>
-                        
-                        <div class="task-actions">
-                            <button class="btn btn-sm" 
-                                    ng-class="task.completed ? 'btn-warning' : 'btn-success'"
-                                    ng-click="vm.toggleTask(task.id)">
-                                {{task.completed ? 'Undo' : 'Complete'}}
-                            </button>
-                            <button class="btn btn-danger btn-sm" 
-                                    ng-click="vm.deleteTask(task.id)">
-                                Delete
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <p class="task-description">{{task.description}}</p>
-                    
-                    <div class="task-meta">
-                        <span class="task-date">
-                            Due: {{ task.dueDate | date:'mediumDate' }}
-                        </span>
-                        <span class="task-created">
-                            Created: {{ task.createdAt | date:'short' }}
-                        </span>
-                    </div>
-                </div>
+
+            <div class="form-group" style="margin: 0">
+              <input
+                type="text"
+                class="form-control"
+                ng-model="vm.searchText"
+                placeholder="Search tasks..."
+                style="width: 200px"
+              />
             </div>
+          </div>
         </div>
+
+        <!-- Tasks List -->
+        <div class="tasks-section">
+          <div class="tasks-header">
+            <h2>Tasks</h2>
+            <div class="task-stats">
+              Total: {{vm.getFilteredTasks().length}} | Completed:
+              {{vm.getCompletedCount()}}
+            </div>
+          </div>
+
+          <div ng-if="vm.getFilteredTasks().length === 0" class="no-tasks">
+            <div class="no-tasks-icon">📝</div>
+            <h3>No tasks found</h3>
+            <p>Add a new task or adjust your filters</p>
+          </div>
+
+          <div
+            ng-repeat="task in vm.getFilteredTasks() | orderBy:vm.sortBy track by task.id"
+            class="task-item"
+            ng-class="{'completed': task.completed}"
+          >
+            <div class="task-header">
+              <div>
+                <h4
+                  class="task-title"
+                  ng-class="{'completed-text': task.completed}"
+                >
+                  {{task.title}}
+                </h4>
+                <span class="task-priority priority-{{task.priority}}">
+                  {{task.priority}}
+                </span>
+                <span
+                  class="task-category category-{{task.categories}}"
+                  ng-if="task.categories"
+                >
+                  {{task.categories}}
+                </span>
+              </div>
+
+              <div class="task-actions">
+                <button
+                  class="btn btn-sm"
+                  ng-class="task.completed ? 'btn-warning' : 'btn-success'"
+                  ng-click="vm.toggleTask(task.id)"
+                >
+                  {{task.completed ? 'Undo' : 'Complete'}}
+                </button>
+                <button
+                  class="btn btn-danger btn-sm"
+                  ng-click="vm.deleteTask(task.id)"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+
+            <p class="task-description">{{task.description}}</p>
+            <p class="task-description">Assigned To: {{task.users}}</p>
+            <p class="task-description">Category: {{task.categories}}</p>
+            <div class="task-meta">
+              <span class="task-date">
+                Due: {{ task.dueDate | date:'mediumDate' }}
+              </span>
+              <span class="task-created">
+                Created: {{ task.createdAt | date:'short' }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <app-root></app-root>
-</body>
+  </body>
 </html>

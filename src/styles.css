@@ -267,6 +267,35 @@ textarea.form-control {
     opacity: 0.7;
 }
 
+.task-category {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-block;
+}
+
+.category-Development { 
+    background: #f3a9a9; 
+    color: #c62828; 
+    border: 1px solid #c62828;
+}
+
+.category-Design { 
+    background: #9cffb3; 
+    color: #00300b; 
+    border: 1px solid #00300b;
+}
+
+.category-Testing { 
+    background: #ffe38e; 
+    color: #523d00; 
+    border: 1px solid #523d00;
+}
+
+
 .task-priority {
     padding: 6px 14px;
     border-radius: 20px;

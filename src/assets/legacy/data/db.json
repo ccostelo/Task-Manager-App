@@ -36,13 +36,13 @@
       "completed": true,
       "createdAt": "2025-06-13T07:00:00.000Z",
       "dueDate": "2025-06-16T23:59:59.000Z",
-      "completedAt": "2025-06-17T02:27:32.533Z",
+      "completedAt": "2025-06-17T13:35:32.186Z",
       "tags": [
         "setup",
         "tools",
         "environment"
       ],
-      "updatedAt": "2025-06-17T02:27:32.533Z"
+      "updatedAt": "2025-06-17T13:35:32.186Z"
     },
     {
       "id": "4",
@@ -56,7 +56,9 @@
         "testing",
         "quality",
         "development"
-      ]
+      ],
+      "completedAt": null,
+      "updatedAt": "2025-06-17T11:17:55.259Z"
     },
     {
       "id": "5",
@@ -73,13 +75,61 @@
       ]
     },
     {
-      "title": "New task",
-      "description": "sample task",
-      "priority": "high",
-      "dueDate": "2025-06-24",
+      "id": "bf69",
+      "title": "Adding Ng Redux and Redux",
+      "description": "new exercise",
+      "priority": "medium",
+      "dueDate": "2025-06-18T10:17:40.039Z",
       "completed": false,
+      "createdAt": "2025-06-17T10:18:12.686Z",
+      "completedAt": null
+    },
+    {
+      "id": "9cde",
+      "title": "Decrement Task Sort DAte",
+      "description": "checking for date display",
+      "priority": "medium",
+      "dueDate": "2025-06-17T13:33:55.653Z",
+      "completed": false,
+      "createdAt": "2025-06-17T13:34:35.074Z",
       "completedAt": null,
-      "id": "7d6ec043-c846-4359-f182-824495d08b11"
+      "updatedAt": "2025-06-17T13:46:58.398Z"
+    },
+    {
+      "id": "6d7b",
+      "title": "Hello Sample",
+      "description": "Hello Sample",
+      "priority": "medium",
+      "dueDate": "2025-06-17T14:21:17.151Z",
+      "users": "John Doe",
+      "categories": "Development",
+      "completed": false,
+      "createdAt": "2025-06-17T14:21:32.120Z",
+      "completedAt": null
+    },
+    {
+      "id": "ed31",
+      "title": "categories s",
+      "description": "categories s",
+      "priority": "medium",
+      "dueDate": "2025-06-17T14:34:38.816Z",
+      "users": "Jane Smith",
+      "categories": "Design",
+      "completed": false,
+      "createdAt": "2025-06-17T14:34:54.831Z",
+      "completedAt": null
+    },
+    {
+      "id": "c93c",
+      "title": "adawdad",
+      "description": "adwadaw",
+      "priority": "medium",
+      "dueDate": "2025-06-17T14:34:54.847Z",
+      "categories": "Testing",
+      "users": "John Doe",
+      "completed": false,
+      "createdAt": "2025-06-17T14:35:07.004Z",
+      "completedAt": null
     }
   ],
   "users": [
