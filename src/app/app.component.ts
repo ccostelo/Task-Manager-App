@@ -72,10 +72,8 @@ export class AppComponent {
   }
 
   toggleComplete(task: TaskModel): void {
-    console.log('Task: ', task);
     this.taskService.toggleTaskComplete(task).subscribe({
       next: (updated) => {
-
         const index = this.tasks.findIndex(t => t.id === updated.id);
         if (index !== -1) {
           this.tasks[index] = updated;

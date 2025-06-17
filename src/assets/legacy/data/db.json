@@ -1,1 +1,118 @@
-{"tasks":[{"id":1,"title":"Complete AngularJS Project","description":"Finish the task management application with MVC structure","priority":"high","completed":false,"createdAt":"2025-06-13T08:00:00.000Z","dueDate":"2025-06-20T23:59:59.000Z","tags":["development","angular","project"]},{"id":2,"title":"Study Angular 14 Migration","description":"Research best practices for migrating from AngularJS to Angular 14","priority":"medium","completed":false,"createdAt":"2025-06-13T09:00:00.000Z","dueDate":"2025-06-27T23:59:59.000Z","tags":["learning","migration","angular"]},{"id":3,"title":"Setup Development Environment","description":"Install Node.js, Angular CLI, and other necessary tools","priority":"low","completed":true,"createdAt":"2025-06-13T07:00:00.000Z","dueDate":"2025-06-16T23:59:59.000Z","completedAt":"2025-06-13T10:30:00.000Z","tags":["setup","tools","environment"]},{"id":4,"title":"Write Unit Tests","description":"Create comprehensive unit tests for all components and services","priority":"high","completed":false,"createdAt":"2025-06-13T11:00:00.000Z","dueDate":"2025-06-18T23:59:59.000Z","tags":["testing","quality","development"]},{"id":5,"title":"Design UI/UX Improvements","description":"Create mockups for better user experience and modern design","priority":"medium","completed":false,"createdAt":"2025-06-13T12:00:00.000Z","dueDate":"2025-06-25T23:59:59.000Z","tags":["design","ui","ux"]}],"users":[{"id":1,"name":"John Doe","email":"john@example.com","role":"developer"},{"id":2,"name":"Jane Smith","email":"jane@example.com","role":"designer"}],"categories":[{"id":1,"name":"Development","color":"#007bff"},{"id":2,"name":"Design","color":"#28a745"},{"id":3,"name":"Testing","color":"#ffc107"}],"api":[],"favicon.ico":[]}
+{
+  "tasks": [
+    {
+      "id": "1",
+      "title": "Complete AngularJS Project",
+      "description": "Finish the task management application with MVC structure",
+      "priority": "high",
+      "completed": false,
+      "createdAt": "2025-06-13T08:00:00.000Z",
+      "dueDate": "2025-06-20T23:59:59.000Z",
+      "tags": [
+        "development",
+        "angular",
+        "project"
+      ]
+    },
+    {
+      "id": "2",
+      "title": "Study Angular 14 Migration",
+      "description": "Research best practices for migrating from AngularJS to Angular 14",
+      "priority": "medium",
+      "completed": false,
+      "createdAt": "2025-06-13T09:00:00.000Z",
+      "dueDate": "2025-06-27T23:59:59.000Z",
+      "tags": [
+        "learning",
+        "migration",
+        "angular"
+      ]
+    },
+    {
+      "id": "3",
+      "title": "Setup Development Environment",
+      "description": "Install Node.js, Angular CLI, and other necessary tools",
+      "priority": "low",
+      "completed": true,
+      "createdAt": "2025-06-13T07:00:00.000Z",
+      "dueDate": "2025-06-16T23:59:59.000Z",
+      "completedAt": "2025-06-17T02:27:32.533Z",
+      "tags": [
+        "setup",
+        "tools",
+        "environment"
+      ],
+      "updatedAt": "2025-06-17T02:27:32.533Z"
+    },
+    {
+      "id": "4",
+      "title": "Write Unit Tests",
+      "description": "Create comprehensive unit tests for all components and services",
+      "priority": "high",
+      "completed": false,
+      "createdAt": "2025-06-13T11:00:00.000Z",
+      "dueDate": "2025-06-18T23:59:59.000Z",
+      "tags": [
+        "testing",
+        "quality",
+        "development"
+      ]
+    },
+    {
+      "id": "5",
+      "title": "Design UI/UX Improvements",
+      "description": "Create mockups for better user experience and modern design",
+      "priority": "medium",
+      "completed": false,
+      "createdAt": "2025-06-13T12:00:00.000Z",
+      "dueDate": "2025-06-25T23:59:59.000Z",
+      "tags": [
+        "design",
+        "ui",
+        "ux"
+      ]
+    },
+    {
+      "title": "New task",
+      "description": "sample task",
+      "priority": "high",
+      "dueDate": "2025-06-24",
+      "completed": false,
+      "completedAt": null,
+      "id": "7d6ec043-c846-4359-f182-824495d08b11"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "name": "John Doe",
+      "email": "john@example.com",
+      "role": "developer"
+    },
+    {
+      "id": "2",
+      "name": "Jane Smith",
+      "email": "jane@example.com",
+      "role": "designer"
+    }
+  ],
+  "categories": [
+    {
+      "id": "1",
+      "name": "Development",
+      "color": "#007bff"
+    },
+    {
+      "id": "2",
+      "name": "Design",
+      "color": "#28a745"
+    },
+    {
+      "id": "3",
+      "name": "Testing",
+      "color": "#ffc107"
+    }
+  ],
+  "api": [],
+  "favicon.ico": []
+}

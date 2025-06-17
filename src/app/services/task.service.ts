@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 
-
 export interface TaskModel {
   id: number;
   title: string;
@@ -15,12 +14,12 @@ export interface TaskModel {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TaskService {
   private apiUrl = 'http://localhost:3000/tasks';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getAllTasks(): Observable<TaskModel[]> {
     return this.http.get<TaskModel[]>(this.apiUrl);
@@ -35,14 +34,14 @@ export class TaskService {
       ...task,
       completed: false,
       createdAt: new Date().toISOString,
-      completedAt: null
+      completedAt: null,
     });
   }
 
-  updateTask(id: number, updates: Partial<TaskModel>): Observable<TaskModel>{
+  updateTask(id: number, updates: Partial<TaskModel>): Observable<TaskModel> {
     return this.http.put<TaskModel>(`${this.apiUrl}/${id}`, {
       ...updates,
-      updatedAt: new Date().toISOString
+      updatedAt: new Date().toISOString()
     });
   }
 
@@ -51,48 +50,52 @@ export class TaskService {
   }
 
   toggleTaskComplete(task: TaskModel): Observable<TaskModel> {
-    const updates = {
+    const updatedTask: TaskModel = {
+      ...task,
       completed: !task.completed,
       completedAt: !task.completed ? new Date().toISOString() : null
     };
-    return this.updateTask(task.id, updates);
+    return this.updateTask(task.id, updatedTask);
   }
 
   getCompletedTasks(): Observable<TaskModel[]> {
     return this.getAllTasks().pipe(
-      map(tasks => tasks.filter(task => task.completed))
+      map((tasks) => tasks.filter((task) => task.completed))
     );
   }
 
   getPendingTasks(): Observable<TaskModel[]> {
     return this.getAllTasks().pipe(
-      map(tasks => tasks.filter(task => !task.completed))
+      map((tasks) => tasks.filter((task) => !task.completed))
     );
   }
 
   getTasksByPriority(priority: string): Observable<TaskModel[]> {
     return this.getAllTasks().pipe(
-      map(tasks => tasks.filter(task => task.priority === priority))
+      map((tasks) => tasks.filter((task) => task.priority === priority))
     );
   }
 
   searchTasks(term: string): Observable<TaskModel[]> {
     return this.getAllTasks().pipe(
-      map(tasks => tasks.filter(task =>
-        task.title.toLowerCase().includes(term.toLowerCase()) ||
-        task.description.toLowerCase().includes(term.toLowerCase())
-      ))
+      map((tasks) =>
+        tasks.filter(
+          (task) =>
+            task.title.toLowerCase().includes(term.toLowerCase()) ||
+            task.description.toLowerCase().includes(term.toLowerCase())
+        )
+      )
     );
   }
 
   getTaskStats(): Observable<any> {
     return this.getAllTasks().pipe(
-      map(tasks => {
-        const completed = tasks.filter(t => t.completed).length;
-        const pending = tasks.filter(t => !t.completed).length;
-        const high = tasks.filter(t => t.priority === 'high').length;
-        const medium = tasks.filter(t => t.priority === 'medium').length;
-        const low = tasks.filter(t => t.priority === 'low').length;
+      map((tasks) => {
+        const completed = tasks.filter((t) => t.completed).length;
+        const pending = tasks.filter((t) => !t.completed).length;
+        const high = tasks.filter((t) => t.priority === 'high').length;
+        const medium = tasks.filter((t) => t.priority === 'medium').length;
+        const low = tasks.filter((t) => t.priority === 'low').length;
         const total = tasks.length;
         return {
           total,
@@ -101,7 +104,7 @@ export class TaskService {
           high,
           medium,
           low,
-          completionRate: total > 0 ? Math.round((completed / total) * 100) : 0
+          completionRate: total > 0 ? Math.round((completed / total) * 100) : 0,
         };
       })
     );
