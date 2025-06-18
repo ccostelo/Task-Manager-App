@@ -44,9 +44,8 @@
       // vm.tasks = TaskService.getAllTasks();
 
       // Angular 14
-      TaskService2.getAllTasks().subscribe({
+      TaskService2.loadAllTasks().subscribe({
         next: function (tasks) {
-            console.log('categories', tasks);
           vm.tasks = tasks.sort(function (a, b) {
             return new Date(b.createdAt) - new Date(a.createdAt);
           });
@@ -72,7 +71,6 @@
       TaskService2.getCategories().subscribe({
         next: function (categories) {
           vm.categories = categories;
-          console.log('categories', categories);
         },
         error: function (error) {
           console.error("Failed to load users.", error);
